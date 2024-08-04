@@ -35,6 +35,7 @@
 
 <script>
 import axios from 'axios';
+import { API_BASE_DOTNET_USER } from '@/config';
 
 export default {
   data() {
@@ -45,7 +46,11 @@ export default {
   methods: {
     async fetchLoginHistory() {
       try {
-        const response = await axios.get('http://localhost:5075/api/users/login-history/554afc45-d2b8-4583-ac8d-b0afe83c4239');
+        const userId = sessionStorage.getItem('userId');
+        if (!userId) {
+          throw new Error('User ID not found in session storage');
+        }
+        const response = await axios.get(`${API_BASE_DOTNET_USER}/login-history/${userId}`);
         this.loginHistory = response.data;
       } catch (error) {
         console.error('Error fetching login history:', error);

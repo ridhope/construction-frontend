@@ -68,6 +68,7 @@
 <script>
 import axios from 'axios';
 import { mapState, mapActions } from 'vuex';
+import { API_BASE_DOTNET_PROJECT } from '@/config';
 
 export default {
   data() {
@@ -84,7 +85,7 @@ export default {
     ...mapActions(['fetchProjects', 'logout']),
     async fetchProjects() {
       try {
-        const response = await axios.get('http://localhost:5075/api/projects');
+        const response = await axios.get(`${API_BASE_DOTNET_PROJECT}`);
         this.projects = response.data;
       } catch (error) {
         console.error('Error fetching projects:', error);
@@ -102,7 +103,7 @@ export default {
     },
     async deleteProject() {
       try {
-        await axios.delete(`http://localhost:5075/api/projects/${this.projectToDelete}`);
+        await axios.delete(`${API_BASE_DOTNET_PROJECT}/${this.projectToDelete}`);
         this.projects = this.projects.filter(project => project.projectID !== this.projectToDelete);
         this.closeModal();
       } catch (error) {

@@ -27,6 +27,7 @@
 
 <script>
 import axios from 'axios';
+import { API_BASE_SYMFONY_PROJECT } from '@/config';
 
 export default {
   data() {
@@ -36,7 +37,7 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get(`http://localhost:8000/api/projects/${this.$route.params.id}`);
+      const response = await axios.get(`${API_BASE_SYMFONY_PROJECT}/${this.$route.params.id}`);
       console.log(response.data); // Tambahkan log untuk memeriksa data
       this.project = response.data;
     } catch (error) {

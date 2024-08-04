@@ -1,6 +1,8 @@
 // store/index.js
 import { createStore } from 'vuex';
 import axios from 'axios';
+import { API_BASE_DOTNET_USER } from '@/config';
+import { API_BASE_SYMFONY_PROJECT } from '@/config';
 
 const store = createStore({
   state: {
@@ -18,7 +20,7 @@ const store = createStore({
   actions: {
     async login({ commit }, credentials) {
       try {
-        const response = await axios.post('http://localhost:5075/api/users/login', credentials);
+        const response = await axios.post(`${API_BASE_DOTNET_USER}/login`, credentials);
         if (response.data.userId) {
           commit('setUser', response.data.userId);
           sessionStorage.setItem('userId', response.data.userId);
@@ -30,7 +32,7 @@ const store = createStore({
       }
     },
     async fetchProjects({ commit }) {
-      const response = await axios.get('http://localhost:8000/api/projects');
+      const response = await axios.get(`${API_BASE_SYMFONY_PROJECT}`);
       commit('setProjects', response.data);
     },
     logout({ commit }) {

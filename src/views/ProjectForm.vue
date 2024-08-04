@@ -52,6 +52,7 @@
   <script>
   import axios from 'axios';
   import { v4 as uuidv4 } from 'uuid';
+  import { API_BASE_DOTNET_PROJECT } from '@/config';
   
   export default {
     data() {
@@ -85,7 +86,7 @@
     methods: {
       async fetchProjectData(projectID) {
         try {
-          const response = await axios.get(`http://localhost:5075/api/projects/${projectID}`);
+          const response = await axios.get(`${API_BASE_DOTNET_PROJECT}/${projectID}`);
           const project = response.data;
           // Convert constructionStartDate to YYYY-MM-DD format
           project.constructionStartDate = new Date(project.constructionStartDate).toISOString().split('T')[0];
@@ -103,9 +104,9 @@
   
           let response;
           if (this.isEdit) {
-            response = await axios.put(`http://localhost:5075/api/projects/${this.form.projectID}`, formData);
+            response = await axios.put(`${API_BASE_DOTNET_PROJECT}/${this.form.projectID}`, formData);
           } else {
-            response = await axios.post('http://localhost:5075/api/projects', formData);
+            response = await axios.post(`${API_BASE_DOTNET_PROJECT}`, formData);
           }
   
           if (response.status >= 200 && response.status < 300) {

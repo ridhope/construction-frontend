@@ -28,7 +28,7 @@ Project Structure:
 API Endpoints:
 - API_BASE_DOTNET_PROJECT: http://localhost:5075/api/projects
 - API_BASE_DOTNET_USER: http://localhost:5075/api/users
-- API_BASE_SYMFONY_PROJECT: http://localhost:8080/api/projects
+- API_BASE_SYMFONY_PROJECT: http://localhost:8000/api/projects
 
 
 Features:
